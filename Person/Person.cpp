@@ -26,6 +26,8 @@ public:
 
 	Person(): Person("Свiтлана", "русий", 160, 55.3) {}
 	
+	//~Person();
+	
 	void Menu()
 	{
 	int n;
