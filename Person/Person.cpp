@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream> 
 #include <windows.h>
+#include <string.h>
 using namespace std;
 
 class Person
@@ -21,42 +22,83 @@ public:
 		this->name = name;
 		this->color_hair = color_hair;
 		this->height = height;
-		this->weight = weight;		
+		this->weight = weight;
 	}
 
-	Person(): Person("Свiтлана", "русий", 160, 55.3) {}
-	
-	//~Person();
-	
-	void Menu()
+	Person() : Person("Свiтлана", "русий", 160, 55.3) {}	
+
+	void SetName(string name)
 	{
-	int n;
+		this->name = name;
+	}
+
+	void SetColor_hair(string color_hair)
+	{
+		this->color_hair = color_hair;
+	}
+
+	void SetHeight(int height)
+	{
+		this->height = height;
+	}
+
+	void SetWeight(double weight)
+	{
+		this->weight = weight;
+	}
+
+	string GetName() //const
+	{
+		return name;
+	}
+
+	string GetColor_hair() const
+	{
+		return color_hair;
+	}
+
+	int GetHeight() const
+	{
+		return height;
+	}
+
+	double GetWeight() const
+	{
+		return weight;
+	}
+};
+
+class WorkWithMenu
+{
+public:		
+	static void ShowMenu(Person& p)
+	{
+		int n;
 		cout << "1. Write\n2. Read\n";
 		cin >> n;
-		ofstream out("person.txt", ios::binary | ios::out | ios::trunc);
 
 		if (n == 1)
-		{			
+		{
+			ofstream out("person.txt", ios::binary | ios::out | ios::trunc);
 			if (!out.is_open())
 			{
 				cout << "File Error!\n";
 				return;
 			}
-
 			else
 			{
 				cout << "Файл успiшно створено!\n";
-				out << "Iм'я:  " << name << "\n";
-				out << "Колiр волосся:  " << color_hair << "\n";
-				out << "Рiст: " << height << "\n";
-				out << "Вага:  " << weight;
+				out << p.GetName() << "\n";
+				out << p.GetColor_hair() << "\n";
+				out << p.GetHeight() << "\n";
+				out << p.GetWeight() << "\n";
 			}
-			out.close();			
+			out.close();
 		}
 
 		else
 		{
-			ifstream in("person.txt", ios::binary | ios::in);
+			ifstream in("person.txt", ios::binary);
 
 			if (!in)
 			{
@@ -64,16 +106,19 @@ public:
 			}
 
 			else
-			{				
-			in.seekg(0, ios::beg); 
-			Person p;
-			in.read((char*)&p, sizeof(Person)); 
-			cout << "Iм'я:  " << p.name << "\n" << "Колiр волосся:  " << p.color_hair << "\n"
-				<< "Рiст: " << p.height << "\n" << "Вага:  " << p.weight << "\n";			
-			}
+			{
+				Person copy;
 
-			out.close();
-			in.close();
+				in >> copy.GetName();
+				in >> copy.GetColor_hair();
+				in >> copy.GetHeight();
+				in >> copy.GetWeight();
+
+				cout << "Iм'я:  " << copy.GetName() << "\n" << "Колiр волосся:  " << copy.GetColor_hair() << "\n"
+				     << "Рiст: " << copy.GetHeight() << "\n" << "Вага:  " << copy.GetWeight() << "\n";
+
+			}
+				in.close();			
 		}
 	}
 };
@@ -85,8 +130,7 @@ int main()
 	system("color 0B");
 	Person p;
 
-	p.Menu();	
+	WorkWithMenu::ShowMenu(p);
 
 	cout << "\n\n";
 }
-
