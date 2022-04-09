@@ -99,6 +99,10 @@ public:
 		else
 		{
 			ifstream in("person.txt", ios::binary);
+			string temp_name;
+			string temp_hair;
+			int temp_height;
+			double temp_weight;
 
 			if (!in)
 			{
@@ -109,10 +113,15 @@ public:
 			{
 				Person copy;
 
-				in >> copy.GetName();
-				in >> copy.GetColor_hair();
-				in >> copy.GetHeight();
-				in >> copy.GetWeight();
+				copy.GetName() = temp_name;
+				copy.GetColor_hair() = temp_hair;
+				//copy.GetHeight() = temp_height;
+				//copy.GetWeight() = temp_weight;
+
+				in >> temp_name;
+				in >> temp_hair;
+				//in >> copy.GetHeight();
+				//in >> copy.GetWeight();
 
 				cout << "Iм'я:  " << copy.GetName() << "\n" << "Колiр волосся:  " << copy.GetColor_hair() << "\n"
 				     << "Рiст: " << copy.GetHeight() << "\n" << "Вага:  " << copy.GetWeight() << "\n";
