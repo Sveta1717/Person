@@ -118,6 +118,11 @@ public:
 				in >> temp_hair;
 				in >> temp_height;
 				in >> temp_weight;
+				
+				p.SetName(temp_name);
+				p.SetColor_hair(temp_hair);
+				p.SetHeight(temp_height);
+				p.SetWeight(temp_weight);
 
 				cout << "Iм'я:  " << copy.GetName() << "\n" << "Колiр волосся:  " << copy.GetColor_hair() << "\n"
 				     << "Рiст: " << copy.GetHeight() << "\n" << "Вага:  " << copy.GetWeight() << "\n";
